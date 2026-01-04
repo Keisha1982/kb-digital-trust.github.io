@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keisha Bryan | Digital Accessibility SME & AI Governance Lead</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- ACCESSIBILITY & CORE VARIABLES --- */
+        :root {
+            --primary-blue: #0ea5e9; /* Accessible sky blue */
+            --nav-blue: #1e3a8a; /* Deep navy */
+            --bg-dark: #0f172a; /* Slate black/blue */
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-green: #10b981; /* For Clearances */
+            --focus-outline: 3px solid #ffdd00;
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Skip to Content for Screen Readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section { padding: 4rem 0; border-bottom: 1px solid #334155; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background-color: var(--nav-blue);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: var(--primary-blue); }
+
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+        nav ul li a:hover, nav ul li a:focus {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+            outline: none;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .hero .subtitle { 
+            font-size: 1.5rem; 
+            color: var(--primary-blue); 
+            margin-bottom: 1.5rem; 
+            font-weight: 500;
+        }
+        .hero p { max-width: 800px; margin: 0 auto 2rem; color: var(--text-muted); }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: #000;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover, .btn:focus {
+            background-color: white;
+            transform: translateY(-2px);
+            outline: var(--focus-outline);
+        }
+
+        /* --- GRID & CARDS --- */
+        .section-header { margin-bottom: 3rem; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary-blue); }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-blue);
+            height: 100%;
+        }
+
+        .card h3 { margin-bottom: 1rem; color: var(--primary-blue); display: flex; align-items: center; gap: 0.5rem; }
+        .card ul { list-style: none; }
+        .card ul li { margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .card ul li i { color: var(--primary-blue); margin-top: 5px; font-size: 0.8rem; }
+
+        /* --- BADGES & TAGS --- */
+        .badge-container { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .badge {
+            background: #334155;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .badge.clearance { background: var(--accent-green); color: #000; }
+
+        /* --- TOOLS SECTION --- */
+        .tools-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .tool-item {
+            background: var(--nav-blue);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        /* --- FOOTER --- */
+        footer { background: var(--nav-blue); padding: 3rem 0; text-align: center; }
+        .social-links { margin: 1.5rem 0; font-size: 1.5rem; }
+        .social-links a { color: white; margin: 0 1rem; text-decoration: none; }
+        .social-links a:hover { color: var(--primary-blue); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* In a real app, add a hamburger menu */
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* HIGH CONTRAST FOCUS */
+        *:focus { outline: var(--focus-outline); outline-offset: 4px; }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav aria-label="Main Navigation">
+        <div class="container nav-container">
+            <a href="#" class="logo">KB<span>.</span>ACCESS</a>
+            <ul>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#governance">Governance</a></li>
+                <li><a href="#certs">Certifications</a></li>
+                <li><a href="#portfolio">Deliverables</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <header class="hero">
+            <div class="container">
+                <h1>Keisha Bryan</h1>
+                <p class="subtitle">Digital Accessibility SME | AI & Cloud Governance Lead</p>
+                <p>Ensuring compliance at the intersection of AI infrastructure and human-centric design. 15+ years of experience leading remediation for federal, healthcare, and enterprise platforms.</p>
+                <div class="badge-container" style="justify-content: center;">
+                    <span class="badge">WCAG 2.2</span>
+                    <span class="badge">Section 508</span>
+                    <span class="badge">NIST AI RMF</span>
+                    <span class="badge clearance">Top Secret Clearance</span>
+                </div>
+                <br>
+                <a href="#contact" class="btn">Request Consultation</a>
+            </div>
+        </header>
+
+        <section id="expertise">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Core Expertise Areas</h2>
+                    <p>Strategic accessibility embedded into the product lifecycle.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3><i class="fas fa-universal-access"></i> Digital Accessibility</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> WCAG 2.0 / 2.1 / 2.2 Specialist</li>
+                            <li><i class="fas fa-check"></i> Mobile (iOS VoiceOver / Android TalkBack)</li>
+                            <li><i class="fas fa-check"></i> Complex PDF & Document Remediation</li>
+                            <li><i class="fas fa-check"></i> Trusted Tester v5.1 Methodology</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-robot"></i> AI Governance</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> AI Chatbot & Virtual Assistant Audits</li>
+                            <li><i class="fas fa-check"></i> Bias awareness in ML outputs</li>
+                            <li><i class="fas fa-check"></i> Inclusive design for predictive text</li>
+                            <li><i class="fas fa-check"></i> AI Risk Management (NIST Framework)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-cloud"></i> Cloud & Security</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> AWS & Azure Compliant Delivery</li>
+                            <li><i class="fas fa-check"></i> Accessibility in CI/CD Pipelines</li>
+                            <li><i class="fas fa-check"></i> Data Visualization (Power BI) Access</li>
+                            <li><i class="fas fa-check"></i> Risk Mitigation for SaaS platforms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="governance" style="background-color: rgba(30, 41, 59, 0.5);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Leadership & Strategy</h2>
+                    <p>I don’t just test products—I build scalable governance frameworks.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card" style="border-left-color: var(--accent-green);">
+                        <h3>Strategic Integration</h3>
+                        <p>Defined enterprise SOPs and standards to integrate accessibility into Agile and SAFe delivery models, partnering with UX, Dev, and Security teams.</p>
+                    </div>
+                    <div class="card" style="border-left-color: var(--accent-green);">
+                        <h3>Risk Management</h3>
+                        <p>Oversaw large-scale audits for web and mobile, creating defect severity models and risk-based remediation roadmaps for regulated environments.</p>
+                    </div>
+                    <div class="card" style="border-left-color: var(--accent-green);">
+                        <h3>Executive Briefing</h3>
+                        <p>Delivered accessibility training and high-level compliance briefings to stakeholders to ensure future-proof digital transformation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certs">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Professional Credentials</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Accessibility & Agile</h3>
+                        <div class="badge-container">
+                            <span class="badge">Certified Trusted Tester v5.1</span>
+                            <span class="badge">IAAP CPACC</span>
+                            <span class="badge">JAWS Certified</span>
+                            <span class="badge">SAFe Scrum Master</span>
+                            <span class="badge">CSPO</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Cloud & AI</h3>
+                        <div class="badge-container">
+                            <span class="badge">Azure AI Specialist</span>
+                            <span class="badge">AWS Cloud Practitioner</span>
+                            <span class="badge">Power BI Data Analyst</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Security & Data</h3>
+                        <div class="badge-container">
+                            <span class="badge">CompTIA Security+</span>
+                            <span class="badge">Salesforce Business Analyst</span>
+                            <span class="badge">CompTIA Project+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Portfolio Deliverables</h2>
+                    <p>Standardized artifacts provided during engagements:</p>
+                </div>
+                <div class="tools-flex">
+                    <div class="tool-item">ACR / VPAT Reports</div>
+                    <div class="tool-item">WCAG 2.2 Test Plans</div>
+                    <div class="tool-item">AI Chatbot Checklists</div>
+                    <div class="tool-item">Remediation Logs</div>
+                    <div class="tool-item">KPI Dashboards</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="text-align: center;">
+            <div class="container">
+                <h2>Ready to scale your accessibility program?</h2>
+                <p style="margin: 1.5rem 0;">I bring clarity, credibility, and future-proof strategy to high-risk environments.</p>
+                <div class="badge-container" style="justify-content: center; margin-bottom: 2rem;">
+                    <span class="badge">Government Systems</span>
+                    <span class="badge">Healthcare</span>
+                    <span class="badge">AI Platforms</span>
+                </div>
+                <a href="mailto:your-email@example.com" class="btn">Get In Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Keisha Bryan</strong> | Digital Accessibility SME</p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">© 2024. This portfolio is designed to be WCAG 2.2 AA compliant.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
